@@ -35,7 +35,7 @@ packaging==23.2
 pandas==1.5.3
 peewee==3.17.0
 pillow==10.2.0
-pip==23.3.1
+pip==24
 pipreqs==0.4.13
 protobuf==3.20.3
 pyarrow==15.0.0
@@ -45,7 +45,7 @@ Pympler==1.0.1
 pyparsing==3.1.1
 python-dateutil==2.8.2
 pytz==2023.3.post1
-pypiwin32==24.0
+pywin32==306
 referencing==0.32.1
 requests==2.31.0
 rich==13.7.0
