@@ -5,7 +5,7 @@ import xlwings as xw
 
 
 
-df0 = xw.load(index = False)
+df0 = pd.read_clipboard(sep ='')
 categorical_fields = []
 numeric_fields = []
 option2 = ''
