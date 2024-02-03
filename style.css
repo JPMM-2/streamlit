@@ -1,0 +1,11 @@
+body {
+    color: #2E86C1;
+    background-color: #1685d3;
+}
+
+.stButton>button {
+    color: #070801;
+    border-radius: 10%;
+    height: 20em;
+    width: 20em;
+}
