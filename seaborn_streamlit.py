@@ -1,87 +1,62 @@
+# App created by Data Professor http://youtube.com/dataprofessor
+# GitHub repo of this app 
+# Demo of this app
+
 import streamlit as st
-import seaborn as sns
-import pandas as pd
-import xlwings as xw
+import time
+
+# CSS by andfanilo
+# Source: https://discuss.streamlit.io/t/creating-a-nicely-formatted-search-field/1804
+def local_css(file_name):
+    with open(file_name) as f:
+        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+
+#def remote_css(url):
+#    st.markdown(f'<link href="{url}" rel="stylesheet">', unsafe_allow_html=True)
+
+#def icon(icon_name):
+#    st.markdown(f'<i class="material-icons">{icon_name}</i>', unsafe_allow_html=True)
+
+local_css("style.css")
+#remote_css('https://fonts.googleapis.com/icon?family=Material+Icons')
 
 
+#---------------------------------#
+st.write("""
+# The Pomodoro App
 
-df0 = xw.load(index = False)
-categorical_fields = []
-numeric_fields = []
-option2 = ''
+Let's do some focus work in data science with this app.
 
-def user_input(df0):
-    
-    for col in df0.columns:
-        if df0[col].dtypes == 'object':
-            categorical_fields.append(col)
-            unique = df0[col].unique()
-            option = st.sidebar.multiselect('Choose your ' + str(col), unique,unique)
-            #st.write('# You selected:', option)
-            df0 = df0[df0[col].isin(option)]
-    for col in df0.columns:
-        #st.write('my header isssssss ' +str(col))
-        if df0[col].dtypes == 'float64' and int(df0[col].min()) != int(df0[col].max()):
-            numeric_fields.append(col)
-            param1 = st.sidebar.slider(col,int(df0[col].min()), int(df0[col].max()), int(df0[col].min()))
-            df0 = df0[df0[col]>=param1]
-        
-			
-    option2 = st.sidebar.selectbox('Select the field', categorical_fields)
-    
-    st.dataframe(df0.describe())
-    #st.write(df0.columns.to_list())
-    
-    import matplotlib.pyplot as plt
-    for col in categorical_fields:
-        
-        fig2 = plt.figure(figsize=(10, 4))
-        sns.countplot(x=df0[col], data = df0)
-        st.pyplot(fig2)
+Developed by: [Data Professor](http://youtube.com/dataprofessor)
 
-    fig = sns.pairplot(df0, hue = option2)
-    st.pyplot(fig)
-  
-    st.write(categorical_fields)
-    st.write(numeric_fields)
-    
+""")
 
-user_input(df0)
+# Timer
+# Created by adapting from:
+# https://www.geeksforgeeks.org/how-to-create-a-countdown-timer-using-python/
+# https://docs.streamlit.io/en/latest/api.html#lay-out-your-app
 
+button_clicked = st.button("Start")
 
+t1 = 15
+t2 = 3
 
+if button_clicked:
+    with st.empty():
+        while t1:
+            mins, secs = divmod(t1, 60)
+            timer = '{:02d}:{:02d}'.format(mins, secs)
+            st.header(f"⏳ {timer}")
+            time.sleep(1)
+            t1 -= 1
+            st.success("🔔 25 minutes is over! Time for a break!")
 
-
-
-
-
-
-
-
-import pandas as pd
-
-dfwwwww = pd.DataFrame([[1,2,'field3_0','field4_0'],[5,526,'field3_1','field4_1'], [9,371,'field3_2','field4_2']], columns = ['fld1','fld2','fld3','fld4'])
-print (dfwwwww)
-dfwwwww.to_clipboard()
-
-df1dfwwwww = pd.read_clipboard()
-df1dfwwwww
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    with st.empty():
+        while t2:
+            # Start the break
+            mins2, secs2 = divmod(t2, 60)
+            timer2 = '{:02d}:{:02d}'.format(mins2, secs2)
+            st.header(f"⏳ {timer2}")
+            time.sleep(1)
+            t2 -= 1
+            st.error("⏰ 5 minute break is over!")
