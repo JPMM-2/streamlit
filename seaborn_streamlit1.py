@@ -6,7 +6,7 @@ import numpy as np
 
 
 
-df0 = pd.DataFrame(np.random.randn(5000, 8), columns=("col %d" % i for i in range(20)))
+df0 = pd.DataFrame(np.random.randn(50, 8), columns=("col %d" % i for i in range(20)))
 categorical_fields = []
 numeric_fields = []
 option2 = ''
